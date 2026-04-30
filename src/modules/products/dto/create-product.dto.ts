@@ -47,3 +47,32 @@ export class CreateProductDto {
     @IsNumber()
     productMeasurementId: number
 }
+
+
+
+// model Product {
+//   id Int @id @default(autoincrement()) 
+
+//   productCode        Int
+//   productName        String  @db.VarChar(100)
+//   productDescription String?
+//   cost               Decimal
+//   price              Decimal
+//   stock              Int
+//   initialStock       Int
+//   minStock           Int
+//   useProductBatch    Boolean @default(false)
+
+//   productCategory   ProductCategory @relation(fields: [productCategoryId], references: [id])
+//   productCategoryId Int
+
+//   productMeasurement   ProductMeasurement @relation(fields: [productMeasurementId], references: [id])
+//   productMeasurementId Int
+
+//   active Boolean @default(true)
+
+//   createdAt            DateTime              @default(now())
+//   updatedAt            DateTime              @default(now()) @updatedAt
+//   supplierBuysProducts SupplierBuysProduct[]
+//   productBatches       ProductBatch[]
+// }

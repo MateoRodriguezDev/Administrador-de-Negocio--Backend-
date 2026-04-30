@@ -53,6 +53,8 @@ model ProductCategory {
   categoryName        String  @db.VarChar(100)
   categoryDescription String?
 
+  active Boolean @default(true)
+
   products Product[]
 
   createdAt DateTime @default(now())
