@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
+import { PrismaExceptionFilter } from './common/filters/prisma-exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,7 +24,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
 
   //Para generalizar la respuesta de errores de los controllers
-  app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalFilters(new AllExceptionsFilter(), new PrismaExceptionFilter());
 
     const config = new DocumentBuilder()
     .setTitle('ABM Docs')
