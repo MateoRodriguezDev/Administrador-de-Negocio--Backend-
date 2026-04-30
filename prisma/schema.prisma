@@ -69,6 +69,8 @@ model ProductMeasurement {
 
   products Product[]
 
+  active Boolean @default(true)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
@@ -108,6 +110,8 @@ model Supplier {
   supplierEmail   String? @db.VarChar(100)
   supplierAddress String? @db.VarChar(100)
   supplierNotes   String?
+
+  active Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
