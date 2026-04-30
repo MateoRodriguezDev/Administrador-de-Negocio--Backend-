@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  cashier
+  admin
+}
+
+enum State {
+  Completed
+  Pending
+  Cancel
+}
+
+enum BatchState {
+  Active
+  NotActive
+}
+
+enum ProductBatchActionType {
+  Add
+  Remove
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  userName String @db.VarChar(100)
+  password String @db.VarChar(100)
+  role     Role   @default(user)
+
+  active Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model ProductCategory {
+  id Int @id @default(autoincrement()) 
+
+  categoryName        String  @db.VarChar(100)
+  categoryDescription String?
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model ProductMeasurement {
+  id Int @id @default(autoincrement()) 
+
+  measurementName String @db.VarChar(100)
+  measurementUnit String @db.VarChar(5)
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Product {
+  id Int @id @default(autoincrement()) 
+
+  productCode        Int
+  productName        String  @db.VarChar(100)
+  productDescription String?
+  cost               Decimal
+  price              Decimal
+  stock              Int
+  initialStock       Int
+  minStock           Int
+  useProductBatch    Boolean @default(false)
+
+  productCategory   ProductCategory @relation(fields: [productCategoryId], references: [id])
+  productCategoryId Int
+
+  productMeasurement   ProductMeasurement @relation(fields: [productMeasurementId], references: [id])
+  productMeasurementId Int
+
+  active Boolean @default(true)
+
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  supplierBuysProducts SupplierBuysProduct[]
+  productBatches       ProductBatch[]
+}
+
+model Supplier {
+  id Int @id @default(autoincrement()) 
+
+  supplierName    String  @db.VarChar(100)
+  supplierNumber  String?
+  supplierEmail   String? @db.VarChar(100)
+  supplierAddress String? @db.VarChar(100)
+  supplierNotes   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  supplierBuys SupplierBuys[]
+}
+
+model SupplierBuys {
+  id Int @id @default(autoincrement())
+  billId   String?
+  discount Int?
+  billDate DateTime?
+  notes    String?
+  state    State     @default(Completed)
+
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  supplierId Int
+
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
+  supplierBuysProducts SupplierBuysProduct[]
+}
+
+model SupplierBuysProduct {
+  id Int @id @default(autoincrement())
+
+  productAmount  Int
+  costPerProduct Decimal
+  notes          String?
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  supplierBuys   SupplierBuys @relation(fields: [supplierBuysId], references: [id])
+  supplierBuysId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  productBatches ProductBatch[]
+}
+
+model ProductBatch {
+  id Int @id @default(autoincrement()) 
+
+  expireDate DateTime
+  notes      String?
+  productQuantity Int
+  state BatchState @default(Active)
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  supplierBuysProduct   SupplierBuysProduct? @relation(fields: [supplierBuysProductId], references: [id])
+  supplierBuysProductId Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  productBatchActions ProductBatchAction[]
+}
+
+model ProductBatchAction {
+  id Int @id @default(autoincrement())
+
+  type ProductBatchActionType 
+  quantity Int
+
+  productBatch   ProductBatch @relation(fields: [productBatchId], references: [id])
+  productBatchId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
