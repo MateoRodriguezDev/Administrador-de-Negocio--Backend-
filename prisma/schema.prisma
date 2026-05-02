@@ -126,6 +126,8 @@ model SupplierBuys {
   notes    String?
   state    State     @default(Completed)
 
+  active Boolean @default(true)
+
   supplier   Supplier @relation(fields: [supplierId], references: [id])
   supplierId Int
 

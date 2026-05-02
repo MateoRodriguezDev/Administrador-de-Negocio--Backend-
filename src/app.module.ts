@@ -7,6 +7,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { ProductCategoriesModule } from './modules/product-categories/product-categories.module';
 import { ProductMeasurementsModule } from './modules/product-measurements/product-measurements.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
+import { SuppliersBuysModule } from './modules/suppliers-buys/suppliers-buys.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +20,7 @@ import { SuppliersModule } from './modules/suppliers/suppliers.module';
     ProductCategoriesModule,
     ProductMeasurementsModule,
     SuppliersModule,
+    SuppliersBuysModule,
   ],
   providers: [],
 })
