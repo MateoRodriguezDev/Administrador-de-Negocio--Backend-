@@ -10,6 +10,7 @@ import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { SuppliersBuysModule } from './modules/suppliers-buys/suppliers-buys.module';
 import { SuppliersBuysProductModule } from './modules/suppliers-buys-product/suppliers-buys-product.module';
 import { SuppliersBuysProductsModule } from './modules/suppliers-buys-products/suppliers-buys-products.module';
+import { ProductBatchesModule } from './modules/product-batches/product-batches.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +26,7 @@ import { SuppliersBuysProductsModule } from './modules/suppliers-buys-products/s
     SuppliersBuysModule,
     SuppliersBuysProductModule,
     SuppliersBuysProductsModule,
+    ProductBatchesModule,
   ],
   providers: [],
 })

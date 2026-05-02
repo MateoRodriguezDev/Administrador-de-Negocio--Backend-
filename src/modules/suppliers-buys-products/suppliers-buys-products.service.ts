@@ -29,13 +29,13 @@ export class SuppliersBuysProductsService {
   }
 
   async update(id: number, updateSuppliersBuysProductDto: UpdateSuppliersBuysProductDto) {
-    const supplierBuysProduct = this.findOne(id)
+    const supplierBuysProduct = await this.findOne(id)
 
     return await this.prisma.supplierBuysProduct.update({where: {id}, data: updateSuppliersBuysProductDto})
   }
 
   async remove(id: number) {
-    const supplierBuysProduct = this.findOne(id)
+    const supplierBuysProduct = await this.findOne(id)
 
     return this.update(id, {active: false})
   }

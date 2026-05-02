@@ -32,7 +32,7 @@ export class ProductsService {
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
-    const product = this.findOne(id);
+    const product = await  this.findOne(id);
 
     return this.prisma.product.update({
       where: { id },
@@ -41,7 +41,7 @@ export class ProductsService {
   }
 
   async remove(id: number) {
-    const product = this.findOne(id);
+    const product = await  this.findOne(id);
 
     return this.prisma.product.update({
       where: { id },
