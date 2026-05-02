@@ -8,6 +8,8 @@ import { ProductCategoriesModule } from './modules/product-categories/product-ca
 import { ProductMeasurementsModule } from './modules/product-measurements/product-measurements.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { SuppliersBuysModule } from './modules/suppliers-buys/suppliers-buys.module';
+import { SuppliersBuysProductModule } from './modules/suppliers-buys-product/suppliers-buys-product.module';
+import { SuppliersBuysProductsModule } from './modules/suppliers-buys-products/suppliers-buys-products.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,6 +23,8 @@ import { SuppliersBuysModule } from './modules/suppliers-buys/suppliers-buys.mod
     ProductMeasurementsModule,
     SuppliersModule,
     SuppliersBuysModule,
+    SuppliersBuysProductModule,
+    SuppliersBuysProductsModule,
   ],
   providers: [],
 })

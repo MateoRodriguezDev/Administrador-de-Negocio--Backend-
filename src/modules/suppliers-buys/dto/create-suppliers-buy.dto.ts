@@ -9,32 +9,32 @@ export class CreateSuppliersBuyDto {
     @ApiProperty({example: `COM-123456789`, description: 'Supplier Buys Id'})
   @IsString()
   @IsOptional()
-  billId: string;
+  billId?: string;
 
   @ApiProperty({example: `0.56`, description: 'Percentage of discount'})
   @IsNumber()
   @IsOptional()
-  discount: number;
+  discount?: number;
 
   @ApiProperty({example: `2024-05-02T10:00:00Z`, description: 'Date of the buy'})
   @IsDate()
   @IsOptional()
   @Type(() => Date)
-  billDate: Date;
+  billDate?: Date;
 
   @ApiProperty({example: `Got a discount because products where close to expiring`, description: 'Date of the buy'})
   @IsString()
   @IsOptional()
-  notes: string;
+  notes?: string;
 
   @ApiProperty({example: `Completed`, description: 'State of the buy'})
   @IsString()
   @IsOptional()
-  state: State;
+  state?: State;
 
   @IsBoolean()
   @IsOptional()
-  active: boolean
+  active?: boolean
 
   @ApiProperty({example: `13`, description: 'Supplier Id'})
   @IsNumber()
