@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { State } from '@prisma/client';
 import { Type } from 'class-transformer';
-import { IsBoolean, IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateSuppliersBuyDto {
 
@@ -28,7 +28,7 @@ export class CreateSuppliersBuyDto {
   notes?: string;
 
   @ApiProperty({example: `Completed`, description: 'State of the buy'})
-  @IsString()
+  @IsEnum(State)
   @IsOptional()
   state?: State;
 

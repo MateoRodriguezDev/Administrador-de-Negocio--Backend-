@@ -4,6 +4,7 @@ import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDate,
+  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
@@ -32,7 +33,7 @@ export class CreateProductBatchDto {
   productQuantity: number;
 
   @ApiProperty({ example: `Expired`, description: 'State of the batch' })
-  @IsString()
+  @IsEnum(BatchState)
   @IsOptional()
   state?: BatchState;
 
